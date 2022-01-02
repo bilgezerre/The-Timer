@@ -12,15 +12,15 @@ class LapTimesTableViewCell: UITableViewCell {
     @IBOutlet weak var lapsTitleLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
     
-    func initViews(lapDetails: [PlayerLap]) {
+    func initViews(lapDetails: PlayerLap?) {
         lapsTitleLabel.text = "Laps"
-        
-        lapDetails.forEach { lapInfo in
+        if let playerLap = lapDetails {
             let label = UILabel()
-            let lapInfoText = "\(lapInfo.lapNumber).    \(lapInfo.time)"
+            label.textAlignment = .center
+            label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+            let lapInfoText = "\(playerLap.lapNumber ?? 0))    \(playerLap.time ?? "")"
             label.text = lapInfoText
-            stackView.addArrangedSubview(label)
+            stackView.addArrangedSubview(label)            
         }
-        
     }
 }

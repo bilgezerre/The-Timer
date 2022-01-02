@@ -211,29 +211,29 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LapTimesTableViewCell" id="mRD-v8-GpY" userLabel="LapTimesTableViewCell" customClass="LapTimesTableViewCell" customModule="The_Timer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="218.5" width="414" height="52"/>
+                                        <rect key="frame" x="0.0" y="218.5" width="414" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mRD-v8-GpY" id="j5t-rJ-Kpe">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="52"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Laps" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFt-BU-dza">
-                                                    <rect key="frame" x="188.5" y="21" width="37" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <rect key="frame" x="186.5" y="21" width="41.5" height="21.5"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <color key="textColor" red="0.45577355590000002" green="0.1226545651" blue="0.093880173829999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3kX-GM-Fpl">
-                                                    <rect key="frame" x="0.0" y="51.5" width="414" height="0.5"/>
+                                                    <rect key="frame" x="24" y="52.5" width="366" height="0.5"/>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="NFt-BU-dza" firstAttribute="centerX" secondItem="j5t-rJ-Kpe" secondAttribute="centerX" id="0kc-Yh-3wn"/>
                                                 <constraint firstItem="NFt-BU-dza" firstAttribute="top" secondItem="j5t-rJ-Kpe" secondAttribute="topMargin" constant="10" id="6Jc-s5-bis"/>
-                                                <constraint firstItem="3kX-GM-Fpl" firstAttribute="leading" secondItem="j5t-rJ-Kpe" secondAttribute="leading" id="JbG-A4-acs"/>
-                                                <constraint firstAttribute="bottom" secondItem="3kX-GM-Fpl" secondAttribute="bottom" id="XdK-Cj-y5p"/>
+                                                <constraint firstItem="3kX-GM-Fpl" firstAttribute="leading" secondItem="j5t-rJ-Kpe" secondAttribute="leading" constant="24" id="JbG-A4-acs"/>
+                                                <constraint firstAttribute="bottom" secondItem="3kX-GM-Fpl" secondAttribute="bottom" constant="20" id="XdK-Cj-y5p"/>
                                                 <constraint firstItem="3kX-GM-Fpl" firstAttribute="top" secondItem="NFt-BU-dza" secondAttribute="bottom" constant="10" id="oy6-kc-7Xl"/>
-                                                <constraint firstAttribute="trailing" secondItem="3kX-GM-Fpl" secondAttribute="trailing" id="wwR-QD-j13"/>
+                                                <constraint firstAttribute="trailing" secondItem="3kX-GM-Fpl" secondAttribute="trailing" constant="24" id="wwR-QD-j13"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

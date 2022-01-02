@@ -41,11 +41,11 @@ class SessionViewController: BaseViewController {
     var playersViewModel = PlayersViewModel()
     var playerLapDetails = List<PlayerLap>()
     var sessionComponents: [SessionComponents] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         initViews()
         initViewModel()
+        sessionViewModel.createPlayerPracticesToStartSession(playerId: self.playerId)
         playersViewModel.getPlayerInfo(playerId: self.playerId)
     }
     
@@ -189,9 +189,10 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
             cell.initView(isTimerWorking: isTimerWorking, timeString: self.timeString)
             return cell
         case .lapDetails:
-            if let playerLapDetails = sessionViewModel.playerLapModel {
+            let playerLapArray = sessionViewModel.playersOngoingSession?.laps.toArray()
+            if playerLapArray?.count ?? 0 > 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "LapTimesTableViewCell", for: indexPath) as! LapTimesTableViewCell
-                cell.initViews(lapDetails: playerLapDetails)
+                cell.initViews(lapDetails: playerLapArray?.last)
                 return cell
             }
             return UITableViewCell()
@@ -211,9 +212,9 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
         case .lapFinish:
             return Globals.shared.screenWidth * 0.6280193237
         case .lapDetails:
-            let playerLapDetails = sessionViewModel.playerLapModel
-            if playerLapDetails?.count ?? 0 > 0 {
-                return CGFloat.leastNormalMagnitude
+            let playerLapArray = sessionViewModel.playersOngoingSession?.laps.toArray()
+            if playerLapArray?.count ?? 0 > 0 {
+                return UITableView.automaticDimension
             }
             return 0
         case .sessionOverview:
@@ -228,13 +229,16 @@ extension SessionViewController: SessionDelegate {
 //    starts the timer
     func startButtonPressed() {
         setTimer()
-        tableView.reloadData()
+        sessionViewModel.createPlayerPracticesToStartSession(playerId: self.playerId)
     }
     
 //    send data to view model to update the db based on laps in session
     func lapButtonPressed() {
         self.lapCount += 1
-        sessionViewModel.storePlayersLap(playerId: self.playerId, timeString: self.timeString, lapCount: self.lapCount)
+        if let playerPractices = sessionViewModel.playerPracticesModel, let playersOngoingSessionId = sessionViewModel.playersOngoingSession?.sessionId.stringValue {
+            sessionViewModel.storePlayersLap(playerPractices: playerPractices, sessionId: playersOngoingSessionId, timeString: self.timeString, lapCount: self.lapCount)
+        }
+
     }
     
 //    stop the timer
