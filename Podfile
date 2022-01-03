@@ -7,6 +7,7 @@ target 'The Timer' do
 	pod 'RealmSwift', '~>10'
   pod 'SDWebImage', '~> 5.11.1'
   pod 'SwiftMessages'
+  pod 'Charts'
   
   # Pods for The Timer
 

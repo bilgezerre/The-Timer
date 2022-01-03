@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import Charts
 
 protocol SessionDelegate: AnyObject {
     func startButtonPressed()
@@ -23,6 +24,7 @@ enum SessionComponentType {
     case lapFinish
     case lapDetails
     case sessionOverview
+    case chart
 }
 
 class SessionViewController: BaseViewController {
@@ -41,6 +43,9 @@ class SessionViewController: BaseViewController {
     var playersViewModel = PlayersViewModel()
     var playerLapDetails = List<PlayerLap>()
     var sessionComponents: [SessionComponents] = []
+    var isSessionOverviewShown = false
+    var lapInSeconds: Int? = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initViews()
@@ -58,6 +63,7 @@ class SessionViewController: BaseViewController {
         setHeaderView()
         setComponents()
         setTimer()
+        isSessionOverviewShown = false
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -87,13 +93,12 @@ class SessionViewController: BaseViewController {
         }
     }
     
-    func secondsToHoursMinutesSeconds(seconds: Int) -> (Int, Int, Int)
-    {
+    func secondsToHoursMinutesSeconds(seconds: Int) -> (Int, Int, Int) {
+        
         return ((seconds / 3600), ((seconds % 3600) / 60),((seconds % 3600) % 60))
     }
     
-    func makeTimeString(hours: Int, minutes: Int, seconds : Int) -> String
-    {
+    func makeTimeString(hours: Int, minutes: Int, seconds : Int) -> String {
         var timeString = ""
         timeString += String(format: "%02d", hours)
         timeString += " : "
@@ -148,10 +153,12 @@ class SessionViewController: BaseViewController {
             SessionComponents(type: .lapFinish),
             SessionComponents(type: .lapDetails),
             SessionComponents(type: .sessionOverview),
+            SessionComponents(type: .chart),
         ])
         
     }
     
+//    convert time interval to string
     func timeString(time: TimeInterval) -> String {
         let hours = Int(time) / 3600
         let minutes = Int(time) / 60 % 60
@@ -159,6 +166,27 @@ class SessionViewController: BaseViewController {
         return String(format:"%02i:%02i.%02i", hours, minutes, seconds)
     }
     
+//    draw the chart based on laps in session and the past period of time for each lap
+    func drawChart(lapCount: Double, lapTimeInSeconds: [Double]) -> LineChartData {
+
+            var lineChartEntry  = [ChartDataEntry]()
+            
+            for i in stride(from: 0, to: lapCount, by: +1) {
+                if i<=lapCount{
+                    let lapNo = Int(i)
+                    let value = ChartDataEntry(x: i, y: lapTimeInSeconds[lapNo])
+                    lineChartEntry.append(value)
+                }
+            }
+
+            let line1 = LineChartDataSet(entries: lineChartEntry, label: "Average Lap")
+            line1.colors = [NSUIColor.red]
+
+            let data = LineChartData()
+            data.addDataSet(line1)
+            
+            return data
+        }
 }
 
 extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
@@ -192,12 +220,28 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
             let playerLapArray = sessionViewModel.playersOngoingSession?.laps.toArray()
             if playerLapArray?.count ?? 0 > 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "LapTimesTableViewCell", for: indexPath) as! LapTimesTableViewCell
-                cell.initViews(lapDetails: playerLapArray?.last)
+                cell.initViews(lapDetails: playerLapArray?.last, isSessionOverviewShown: isSessionOverviewShown)
                 return cell
             }
             return UITableViewCell()
             
         case .sessionOverview:
+            if isSessionOverviewShown {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SessionOverviewCell", for: indexPath) as! SessionOverviewCell
+                let sessionOverView = sessionViewModel.playersOngoingSession?.completedSessionOverview
+                cell.initViews(lapCount: lapCount, distance: distance ?? 0.0, minutes: 0.0,avgTimeLap: sessionOverView?.avgTimeLap, avgSpeed: sessionOverView?.avgSpeedInMS, peakSpeed: sessionOverView?.peakSpeed)
+                return cell
+            } else {
+                return UITableViewCell()
+            }
+        case .chart:
+            if isSessionOverviewShown {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SessionChartTableViewCell", for: indexPath) as! SessionChartTableViewCell
+                let lapTimesArray = sessionViewModel.playersOngoingSession?.lapTimesArray.toArray()
+                let chartData = drawChart(lapCount: Double(lapCount), lapTimeInSeconds: lapTimesArray ?? [1.0])
+                cell.initViews(data: chartData)
+                return cell
+            }
             return UITableViewCell()
         }
     }
@@ -218,7 +262,16 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
             }
             return 0
         case .sessionOverview:
-            return Globals.shared.screenWidth * 0.4830917874
+            if isSessionOverviewShown {
+                return Globals.shared.screenWidth * 0.5797101449
+            }
+            return 0
+        case .chart:
+            if isSessionOverviewShown {
+                return Globals.shared.screenWidth * 0.9661835749
+            }
+            return 0
+            
         }
     }
     
@@ -229,23 +282,31 @@ extension SessionViewController: SessionDelegate {
 //    starts the timer
     func startButtonPressed() {
         setTimer()
+        lapCount = 0
         sessionViewModel.createPlayerPracticesToStartSession(playerId: self.playerId)
+        isSessionOverviewShown = false
     }
     
 //    send data to view model to update the db based on laps in session
     func lapButtonPressed() {
         self.lapCount += 1
+        let lapTimeInSeconds = self.counter - (self.lapInSeconds ?? 0)
+        self.lapInSeconds = counter
         if let playerPractices = sessionViewModel.playerPracticesModel, let playersOngoingSessionId = sessionViewModel.playersOngoingSession?.sessionId.stringValue {
-            sessionViewModel.storePlayersLap(playerPractices: playerPractices, sessionId: playersOngoingSessionId, timeString: self.timeString, lapCount: self.lapCount)
+            sessionViewModel.storePlayersLap(playerPractices: playerPractices, sessionId: playersOngoingSessionId, timeString: self.timeString, lapCount: self.lapCount, lapTimeInSeconds: lapTimeInSeconds)
         }
 
     }
     
 //    stop the timer
     func finishButtonPressed() {
+        isSessionOverviewShown = true
+        lapInSeconds = 0
+        if let sessionId = sessionViewModel.playersOngoingSession?.sessionId.stringValue {
+            sessionViewModel.saveSessionOverview(playerId: self.playerId, sessionId: sessionId , lapCount: self.lapCount, finalTimeInSeconds: self.counter, distance: self.distance ?? 1.0)
+        }
         self.stopTimer()
         tableView.reloadData()
-            
     }
     
 }

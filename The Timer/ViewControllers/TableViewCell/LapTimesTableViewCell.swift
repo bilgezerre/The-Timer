@@ -12,15 +12,17 @@ class LapTimesTableViewCell: UITableViewCell {
     @IBOutlet weak var lapsTitleLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
     
-    func initViews(lapDetails: PlayerLap?) {
+    func initViews(lapDetails: PlayerLap?, isSessionOverviewShown: Bool) {
         lapsTitleLabel.text = "Laps"
-        if let playerLap = lapDetails {
-            let label = UILabel()
-            label.textAlignment = .center
-            label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-            let lapInfoText = "\(playerLap.lapNumber ?? 0))    \(playerLap.time ?? "")"
-            label.text = lapInfoText
-            stackView.addArrangedSubview(label)            
+        if !(isSessionOverviewShown) {
+            if let playerLap = lapDetails {
+                let label = UILabel()
+                label.textAlignment = .center
+                label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                let lapInfoText = "\(playerLap.lapNumber ?? 0))    \(playerLap.time ?? "")"
+                label.text = lapInfoText
+                stackView.addArrangedSubview(label)
+            }
         }
     }
 }

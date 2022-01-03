@@ -25,6 +25,9 @@
 		454187EE27734315005BEF72 /* The_TimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454187ED27734315005BEF72 /* The_TimerUITests.swift */; };
 		454187F027734315005BEF72 /* The_TimerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454187EF27734315005BEF72 /* The_TimerUITestsLaunchTests.swift */; };
 		454188062773494A005BEF72 /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454188052773494A005BEF72 /* PlayerModel.swift */; };
+		45744C5C278235AC00664D7A /* SessionOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45744C5B278235AC00664D7A /* SessionOverviewCell.xib */; };
+		45744C5E27823A4800664D7A /* SessionOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45744C5D27823A4800664D7A /* SessionOverviewCell.swift */; };
+		45744C602782771400664D7A /* SessionChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45744C5F2782771400664D7A /* SessionChartTableViewCell.swift */; };
 		457D818B27734E3E00C2E365 /* PlayersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457D818A27734E3E00C2E365 /* PlayersViewModel.swift */; };
 		457D818E2773B56700C2E365 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457D818D2773B56700C2E365 /* Extension.swift */; };
 		45871A992777975D00BA25B1 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45871A972777975D00BA25B1 /* PlayerTableViewCell.swift */; };
@@ -80,6 +83,9 @@
 		454187ED27734315005BEF72 /* The_TimerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_TimerUITests.swift; sourceTree = "<group>"; };
 		454187EF27734315005BEF72 /* The_TimerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_TimerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		454188052773494A005BEF72 /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
+		45744C5B278235AC00664D7A /* SessionOverviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionOverviewCell.xib; sourceTree = "<group>"; };
+		45744C5D27823A4800664D7A /* SessionOverviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionOverviewCell.swift; sourceTree = "<group>"; };
+		45744C5F2782771400664D7A /* SessionChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionChartTableViewCell.swift; sourceTree = "<group>"; };
 		457D818A27734E3E00C2E365 /* PlayersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewModel.swift; sourceTree = "<group>"; };
 		457D818D2773B56700C2E365 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		45871A972777975D00BA25B1 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
@@ -210,6 +216,7 @@
 				45871A982777975D00BA25B1 /* PlayerTableViewCell.xib */,
 				452B9C71277906E300A1F2BA /* SessionHeaderCell.xib */,
 				452B9C732779098C00A1F2BA /* SessionLapFinishCell.xib */,
+				45744C5B278235AC00664D7A /* SessionOverviewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -222,6 +229,8 @@
 				452B9C7527790A0B00A1F2BA /* SessionLapFinishCell.swift */,
 				45F10C6B277A3E6500357910 /* StopwatchTableViewCell.swift */,
 				45F10C6D277A5E2100357910 /* LapTimesTableViewCell.swift */,
+				45744C5D27823A4800664D7A /* SessionOverviewCell.swift */,
+				45744C5F2782771400664D7A /* SessionChartTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -394,6 +403,7 @@
 				454187D927734315005BEF72 /* LaunchScreen.storyboard in Resources */,
 				452B9C742779098C00A1F2BA /* SessionLapFinishCell.xib in Resources */,
 				454187D627734315005BEF72 /* Assets.xcassets in Resources */,
+				45744C5C278235AC00664D7A /* SessionOverviewCell.xib in Resources */,
 				454187D427734312005BEF72 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -532,7 +542,9 @@
 				454187D127734312005BEF72 /* MainViewController.swift in Sources */,
 				452B9C70277905A200A1F2BA /* SessionHeaderCell.swift in Sources */,
 				457D818B27734E3E00C2E365 /* PlayersViewModel.swift in Sources */,
+				45744C602782771400664D7A /* SessionChartTableViewCell.swift in Sources */,
 				452B9C7627790A0B00A1F2BA /* SessionLapFinishCell.swift in Sources */,
+				45744C5E27823A4800664D7A /* SessionOverviewCell.swift in Sources */,
 				45871A9C2777C6AD00BA25B1 /* BaseViewController.swift in Sources */,
 				45871A9E2777C74300BA25B1 /* Enums.swift in Sources */,
 				452B9C6C2778D81100A1F2BA /* SessionViewModel.swift in Sources */,

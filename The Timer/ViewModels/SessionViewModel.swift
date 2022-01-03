@@ -27,7 +27,7 @@ class SessionViewModel {
 
     
 //    store the lap of the player's ongoing session
-    func storePlayersLap(playerPractices: PlayerPractices, sessionId: String, timeString: String, lapCount: Int) {
+    func storePlayersLap(playerPractices: PlayerPractices, sessionId: String, timeString: String, lapCount: Int, lapTimeInSeconds: Int) {
             DispatchQueue.main.async {
                 let realm = try! Realm()
 
@@ -41,17 +41,14 @@ class SessionViewModel {
                         let playerLapDetails = PlayerLap()
                         playerLapDetails.lapNumber = lapCount
                         playerLapDetails.time = timeString
-                        print("lapDetails\(playerLapDetails)")
+                        playerLapDetails.lapTimeInSeconds = lapTimeInSeconds
                         
+                        let calculatedTotalLapTimesInSeconds = (playerSessionObject.totalLapTimesInSeconds ?? 0) + lapTimeInSeconds
                         playerSessionObject.laps.append(playerLapDetails)
-                        print("playerSessionObject\(playerSessionObject)")
-                
-                        print("playerPracticeObjectBefore\(playerPracticeObject)")
-                        realm.add(playerPracticeObject, update: .modified)
-
-                        print("playerPracticeObject\(playerPracticeObject)")
                         
-//                        playerPracticeObject?.playerSession = pl
+                        playerSessionObject.lapTimesArray.append(Double(lapTimeInSeconds))
+                        playerSessionObject.totalLapTimesInSeconds = calculatedTotalLapTimesInSeconds
+                        realm.add(playerPracticeObject, update: .modified)
                         
                         self.playerPracticesModel = playerPractices
                     }
@@ -94,10 +91,54 @@ class SessionViewModel {
                             self.playersOngoingSession = playerSession
                         }
                         
-
                     }
                 }
         }
+    }
+    
+//    save players practice details based on spesific session
+    func saveSessionOverview(playerId: String, sessionId: String, lapCount: Int, finalTimeInSeconds: Int, distance: Double) {
+        DispatchQueue.main.async {
+            let realm = try! Realm()
+
+            if let playerPracticeObject = realm.objects(PlayerPractices.self).first(where: { practice in
+                practice.playerId == playerId
+            }){
+                if let playerSessionObject = playerPracticeObject.playerSession.first(where: { session in
+                session.sessionId.stringValue == sessionId
+            }) {
+                    try! realm.write {
+                        let playerLapArray = playerSessionObject.laps.toArray()
+                        let playerLapWithMinLapTime = playerLapArray.min { lap1, lap2 in
+                            lap1.lapTimeInSeconds ?? 0 < lap2.lapTimeInSeconds ?? 0
+                        }
+                        let peakSpeedInSeconds = Double(playerLapWithMinLapTime?.lapTimeInSeconds ?? 0)/60.0
+                        
+                        let averageSpeedInMS = distance / Double(finalTimeInSeconds)
+                        
+                        let avgTimeLap = Double(playerSessionObject.totalLapTimesInSeconds ?? 1) / Double(lapCount)
+                        
+                        let sessionOverview = CompletedSessionOverview()
+                        sessionOverview.lapCount = lapCount
+                        sessionOverview.peakSpeed = peakSpeedInSeconds
+                        sessionOverview.finalTimeInSeconds = finalTimeInSeconds
+                        sessionOverview.avgSpeedInMS = averageSpeedInMS
+                        sessionOverview.avgTimeLap = avgTimeLap
+                        
+                        playerSessionObject.completedSessionOverview = sessionOverview
+                        
+                        realm.add(playerPracticeObject, update: .modified)
+                        
+                        self.playerPracticesModel = playerPracticeObject
+                    }
+
+
+            }
+                
+            }
+
+    }
+
     }
     
 }

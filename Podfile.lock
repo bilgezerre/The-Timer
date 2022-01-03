@@ -1,4 +1,7 @@
 PODS:
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
   - Realm (10.20.1):
     - Realm/Headers (= 10.20.1)
   - Realm/Headers (10.20.1)
@@ -12,23 +15,26 @@ PODS:
   - SwiftMessages/App (9.0.5)
 
 DEPENDENCIES:
+  - Charts
   - RealmSwift (~> 10)
   - SDWebImage (~> 5.11.1)
   - SwiftMessages
 
 SPEC REPOS:
   trunk:
+    - Charts
     - Realm
     - RealmSwift
     - SDWebImage
     - SwiftMessages
 
 SPEC CHECKSUMS:
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   Realm: fac5ecd031fcb81171627b74944c885662d4b266
   RealmSwift: 9b02d25acb46a14756bde9893abb99e2e3675923
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SwiftMessages: 9cca50659fa22bb523b4dd2a958d4442e843a354
 
-PODFILE CHECKSUM: 53a87467fab43a948b0a5afce323526858c85a70
+PODFILE CHECKSUM: 9ba4e69782b29d2d45bb2d8433d7406b49455302
 
 COCOAPODS: 1.11.2
