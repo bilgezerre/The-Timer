@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//display the summary of the session based on required fields
 class SessionOverviewCell: UITableViewCell {
     
     @IBOutlet weak var numberOfLapsLabel: UILabel!

@@ -32,17 +32,20 @@ class Player: Object, Decodable {
      @Persisted(primaryKey: true) var id: ObjectId
      @Persisted var name: Name?
      @Persisted var picture: Picture?
+     @Persisted var playerPractices: PlayerPractices?
 
     
     private enum CodingKeys: String, CodingKey {
         case name
         case picture
+        case playerPractices
     }
     
     required convenience init(from decoder: Decoder) throws {
         self.init()
         self.name = name
         self.picture = picture
+        self.playerPractices = playerPractices
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         name = try container.decode(Name.self, forKey: .name)
@@ -62,11 +65,6 @@ class Name: EmbeddedObject, Decodable {
         case first
         case last
     }
-//
-//    override required init() {
-//        super.init()
-//    }
-//
     required convenience init(from decoder: Decoder) throws {
         self.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)

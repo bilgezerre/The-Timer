@@ -8,6 +8,7 @@ target 'The Timer' do
   pod 'SDWebImage', '~> 5.11.1'
   pod 'SwiftMessages'
   pod 'Charts'
+  pod 'FittedSheets'
   
   # Pods for The Timer
 

@@ -15,7 +15,6 @@ class StopwatchTableViewCell: UITableViewCell {
     }
     
     func initView(isTimerWorking: Bool, timeString: String?){
-        counterLabel.isHidden = !(isTimerWorking)
         if isTimerWorking && timeString != "" {
             counterLabel.text = timeString
         } else {

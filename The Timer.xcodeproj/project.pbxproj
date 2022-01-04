@@ -25,6 +25,8 @@
 		454187EE27734315005BEF72 /* The_TimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454187ED27734315005BEF72 /* The_TimerUITests.swift */; };
 		454187F027734315005BEF72 /* The_TimerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454187EF27734315005BEF72 /* The_TimerUITestsLaunchTests.swift */; };
 		454188062773494A005BEF72 /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454188052773494A005BEF72 /* PlayerModel.swift */; };
+		455FB02427839AA600D578CD /* LeaderBoardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 455FB02327839AA600D578CD /* LeaderBoardCell.xib */; };
+		455FB02627839BE500D578CD /* LeaderBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FB02527839BE500D578CD /* LeaderBoardCell.swift */; };
 		45744C5C278235AC00664D7A /* SessionOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45744C5B278235AC00664D7A /* SessionOverviewCell.xib */; };
 		45744C5E27823A4800664D7A /* SessionOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45744C5D27823A4800664D7A /* SessionOverviewCell.swift */; };
 		45744C602782771400664D7A /* SessionChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45744C5F2782771400664D7A /* SessionChartTableViewCell.swift */; };
@@ -33,10 +35,12 @@
 		45871A992777975D00BA25B1 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45871A972777975D00BA25B1 /* PlayerTableViewCell.swift */; };
 		45871A9A2777975D00BA25B1 /* PlayerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45871A982777975D00BA25B1 /* PlayerTableViewCell.xib */; };
 		45871A9C2777C6AD00BA25B1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45871A9B2777C6AD00BA25B1 /* BaseViewController.swift */; };
-		45871A9E2777C74300BA25B1 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45871A9D2777C74300BA25B1 /* Enums.swift */; };
-		45871AA02777C77800BA25B1 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45871A9F2777C77800BA25B1 /* Loader.swift */; };
 		45871AA22777CACE00BA25B1 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45871AA12777CACE00BA25B1 /* Globals.swift */; };
 		45871AA42777D74100BA25B1 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45871AA32777D74100BA25B1 /* InputViewController.swift */; };
+		459EE06327836B5F00E0BD05 /* LeaderBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EE06227836B5F00E0BD05 /* LeaderBoardViewController.swift */; };
+		459EE0652783881D00E0BD05 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EE0642783881D00E0BD05 /* PickerViewController.swift */; };
+		459EE0672783933400E0BD05 /* SessionToLeaderBoardNavigationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EE0662783933400E0BD05 /* SessionToLeaderBoardNavigationCell.swift */; };
+		45AFD14B2783A32D00CE1B92 /* LeaderBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFD14A2783A32D00CE1B92 /* LeaderBoardViewModel.swift */; };
 		45F10C6A277A0D5D00357910 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F10C69277A0D5D00357910 /* Alert.swift */; };
 		45F10C6C277A3E6500357910 /* StopwatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F10C6B277A3E6500357910 /* StopwatchTableViewCell.swift */; };
 		45F10C6E277A5E2100357910 /* LapTimesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F10C6D277A5E2100357910 /* LapTimesTableViewCell.swift */; };
@@ -83,6 +87,8 @@
 		454187ED27734315005BEF72 /* The_TimerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_TimerUITests.swift; sourceTree = "<group>"; };
 		454187EF27734315005BEF72 /* The_TimerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_TimerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		454188052773494A005BEF72 /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
+		455FB02327839AA600D578CD /* LeaderBoardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeaderBoardCell.xib; sourceTree = "<group>"; };
+		455FB02527839BE500D578CD /* LeaderBoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardCell.swift; sourceTree = "<group>"; };
 		45744C5B278235AC00664D7A /* SessionOverviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionOverviewCell.xib; sourceTree = "<group>"; };
 		45744C5D27823A4800664D7A /* SessionOverviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionOverviewCell.swift; sourceTree = "<group>"; };
 		45744C5F2782771400664D7A /* SessionChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionChartTableViewCell.swift; sourceTree = "<group>"; };
@@ -91,10 +97,12 @@
 		45871A972777975D00BA25B1 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		45871A982777975D00BA25B1 /* PlayerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerTableViewCell.xib; sourceTree = "<group>"; };
 		45871A9B2777C6AD00BA25B1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		45871A9D2777C74300BA25B1 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
-		45871A9F2777C77800BA25B1 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		45871AA12777CACE00BA25B1 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		45871AA32777D74100BA25B1 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
+		459EE06227836B5F00E0BD05 /* LeaderBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardViewController.swift; sourceTree = "<group>"; };
+		459EE0642783881D00E0BD05 /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		459EE0662783933400E0BD05 /* SessionToLeaderBoardNavigationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionToLeaderBoardNavigationCell.swift; sourceTree = "<group>"; };
+		45AFD14A2783A32D00CE1B92 /* LeaderBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardViewModel.swift; sourceTree = "<group>"; };
 		45F10C69277A0D5D00357910 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		45F10C6B277A3E6500357910 /* StopwatchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchTableViewCell.swift; sourceTree = "<group>"; };
 		45F10C6D277A5E2100357910 /* LapTimesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LapTimesTableViewCell.swift; sourceTree = "<group>"; };
@@ -197,6 +205,8 @@
 				454187D027734312005BEF72 /* MainViewController.swift */,
 				45871AA32777D74100BA25B1 /* InputViewController.swift */,
 				452B9C692778B18B00A1F2BA /* SessionViewController.swift */,
+				459EE06227836B5F00E0BD05 /* LeaderBoardViewController.swift */,
+				459EE0642783881D00E0BD05 /* PickerViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -217,6 +227,7 @@
 				452B9C71277906E300A1F2BA /* SessionHeaderCell.xib */,
 				452B9C732779098C00A1F2BA /* SessionLapFinishCell.xib */,
 				45744C5B278235AC00664D7A /* SessionOverviewCell.xib */,
+				455FB02327839AA600D578CD /* LeaderBoardCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -231,6 +242,8 @@
 				45F10C6D277A5E2100357910 /* LapTimesTableViewCell.swift */,
 				45744C5D27823A4800664D7A /* SessionOverviewCell.swift */,
 				45744C5F2782771400664D7A /* SessionChartTableViewCell.swift */,
+				459EE0662783933400E0BD05 /* SessionToLeaderBoardNavigationCell.swift */,
+				455FB02527839BE500D578CD /* LeaderBoardCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -249,6 +262,7 @@
 			children = (
 				457D818A27734E3E00C2E365 /* PlayersViewModel.swift */,
 				452B9C6B2778D81100A1F2BA /* SessionViewModel.swift */,
+				45AFD14A2783A32D00CE1B92 /* LeaderBoardViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -258,8 +272,6 @@
 			children = (
 				457D818D2773B56700C2E365 /* Extension.swift */,
 				45871A9B2777C6AD00BA25B1 /* BaseViewController.swift */,
-				45871A9D2777C74300BA25B1 /* Enums.swift */,
-				45871A9F2777C77800BA25B1 /* Loader.swift */,
 				45871AA12777CACE00BA25B1 /* Globals.swift */,
 				45F10C69277A0D5D00357910 /* Alert.swift */,
 			);
@@ -399,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				452B9C72277906E300A1F2BA /* SessionHeaderCell.xib in Resources */,
+				455FB02427839AA600D578CD /* LeaderBoardCell.xib in Resources */,
 				45871A9A2777975D00BA25B1 /* PlayerTableViewCell.xib in Resources */,
 				454187D927734315005BEF72 /* LaunchScreen.storyboard in Resources */,
 				452B9C742779098C00A1F2BA /* SessionLapFinishCell.xib in Resources */,
@@ -536,9 +549,11 @@
 				45F10C6C277A3E6500357910 /* StopwatchTableViewCell.swift in Sources */,
 				45F10C6E277A5E2100357910 /* LapTimesTableViewCell.swift in Sources */,
 				45871A992777975D00BA25B1 /* PlayerTableViewCell.swift in Sources */,
+				459EE0652783881D00E0BD05 /* PickerViewController.swift in Sources */,
 				454188062773494A005BEF72 /* PlayerModel.swift in Sources */,
 				45F10C6A277A0D5D00357910 /* Alert.swift in Sources */,
 				457D818E2773B56700C2E365 /* Extension.swift in Sources */,
+				45AFD14B2783A32D00CE1B92 /* LeaderBoardViewModel.swift in Sources */,
 				454187D127734312005BEF72 /* MainViewController.swift in Sources */,
 				452B9C70277905A200A1F2BA /* SessionHeaderCell.swift in Sources */,
 				457D818B27734E3E00C2E365 /* PlayersViewModel.swift in Sources */,
@@ -546,13 +561,14 @@
 				452B9C7627790A0B00A1F2BA /* SessionLapFinishCell.swift in Sources */,
 				45744C5E27823A4800664D7A /* SessionOverviewCell.swift in Sources */,
 				45871A9C2777C6AD00BA25B1 /* BaseViewController.swift in Sources */,
-				45871A9E2777C74300BA25B1 /* Enums.swift in Sources */,
 				452B9C6C2778D81100A1F2BA /* SessionViewModel.swift in Sources */,
 				454187CD27734312005BEF72 /* AppDelegate.swift in Sources */,
 				452B9C6A2778B18B00A1F2BA /* SessionViewController.swift in Sources */,
+				459EE06327836B5F00E0BD05 /* LeaderBoardViewController.swift in Sources */,
+				455FB02627839BE500D578CD /* LeaderBoardCell.swift in Sources */,
 				45871AA22777CACE00BA25B1 /* Globals.swift in Sources */,
 				452B9C6E2778D85400A1F2BA /* SessionModel.swift in Sources */,
-				45871AA02777C77800BA25B1 /* Loader.swift in Sources */,
+				459EE0672783933400E0BD05 /* SessionToLeaderBoardNavigationCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

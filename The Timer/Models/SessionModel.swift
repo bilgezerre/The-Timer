@@ -12,17 +12,27 @@ import RealmSwift
 class PlayerPractices: Object, Decodable {
     
     @Persisted(primaryKey: true) var playerId: String?
+//    @Persisted var playerFullName: String?
     @Persisted var playerSession: List<PlayerSession>
+    @Persisted var peakSpeedForSession: Double?
+    @Persisted var maxLapNumber: Int?
+//    @Persisted var playerImageUrl: String?
     
 
     private enum CodingKeys: String, CodingKey {
         case playerId
+//        case playerFullName
+//        case playerImageUrl
         case playerSession
     }
   
-    convenience init(playerId: String, playerSession: [PlayerSession]) {
+    convenience init(playerId: String, playerSession: [PlayerSession], peakSpeedForSession: Double?, maxLapNumber: Int?) {
         self.init()
         self.playerId = playerId
+        self.peakSpeedForSession = peakSpeedForSession
+        self.maxLapNumber = maxLapNumber
+//        self.playerFullName = playerFullName
+//        self.playerImageUrl = playerImageUrl
         self.playerSession.append(objectsIn: playerSession)
         
     }

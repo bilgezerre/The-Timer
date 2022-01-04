@@ -12,8 +12,12 @@ class LapTimesTableViewCell: UITableViewCell {
     @IBOutlet weak var lapsTitleLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
     
-    func initViews(lapDetails: PlayerLap?, isSessionOverviewShown: Bool) {
+    func initViews(lapDetails: PlayerLap?, isSessionOverviewShown: Bool, lapCount: Int) {
         lapsTitleLabel.text = "Laps"
+        if lapCount == 1 {
+            stackView.removeAllArrangedSubviews()
+        }
+        
         if !(isSessionOverviewShown) {
             if let playerLap = lapDetails {
                 let label = UILabel()
@@ -24,5 +28,6 @@ class LapTimesTableViewCell: UITableViewCell {
                 stackView.addArrangedSubview(label)
             }
         }
+
     }
 }

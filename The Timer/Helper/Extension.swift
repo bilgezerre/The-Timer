@@ -29,6 +29,18 @@ extension Realm {
 }
 
 extension UIView {
+    
+    var parentViewController: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if let viewController = parentResponder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
+    }
+    
     func loadNib() -> UIView {
         let bundle = Bundle(for: type(of: self))
         if let nibName = type(of: self).description().components(separatedBy: ".").last {
@@ -109,6 +121,16 @@ extension UIButton {
         self.touchUpInside(closure)
     }
     
+}
+
+extension UIStackView {
+    func removeAllArrangedSubviews() {
+        arrangedSubviews.forEach {
+            self.removeArrangedSubview($0)
+            NSLayoutConstraint.deactivate($0.constraints)
+            $0.removeFromSuperview()
+        }
+    }
 }
 
 extension UIControl {

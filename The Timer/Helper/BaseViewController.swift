@@ -9,8 +9,6 @@ import UIKit
 
 class BaseViewController: UIViewController {
     
-    var state: State = .empty
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -60,24 +58,6 @@ class BaseViewController: UIViewController {
         let titleLabel = UILabel()
         titleLabel.text = title
         self.navigationItem.titleView = titleLabel
-    }
-    
-    func stateController() {
-        switch state {
-        case .empty:
-            break
-        case .loading:
-            print("loading") //will be removed
-            Loader.show()
-        case .populated:
-            print("populated") //will be removed
-            Loader.hide()
-        case .continue:
-            print("continue") //will be removed
-        case .error:
-            print("error") //will be removed
-            Loader.hide()
-        }
     }
     
 }

@@ -9,7 +9,6 @@ import Foundation
 import RealmSwift
 
 
-
 class PlayersViewModel {
 
     
@@ -46,12 +45,12 @@ class PlayersViewModel {
     
     }
     
-        
     
     func getPlayersCount() -> Int {
         return playerModel?.count ?? 0
     }
     
+//    store players info by retrieving from the given API
     func storePlayers() {
         if let url = URL(string: "https://randomuser.me/api/?seed=empatica&inc=name,picture&gender=male&results=10&noinfo") {
             URLSession.shared.dataTask(with: url) { data, response, error in

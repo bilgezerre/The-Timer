@@ -39,6 +39,7 @@ class MainViewController: BaseViewController {
     }
 }
 
+// MARK: - TableView Delegate & Datasource
 extension MainViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return playersViewModel.getPlayersCount()

@@ -19,12 +19,14 @@ struct SessionComponents {
     var type: SessionComponentType
 }
 enum SessionComponentType {
+    case header
     case playerDetails
     case stopwatch
     case lapFinish
     case lapDetails
     case sessionOverview
     case chart
+    case navigation
 }
 
 class SessionViewController: BaseViewController {
@@ -60,7 +62,6 @@ class SessionViewController: BaseViewController {
     }
     
     func initViews() {
-        setHeaderView()
         setComponents()
         setTimer()
         isSessionOverviewShown = false
@@ -85,10 +86,9 @@ class SessionViewController: BaseViewController {
     
 //    only reload the cell which includes the stopwatch
     func reloadStopwatchCell(){
-        if self.sessionComponents[1].type == .stopwatch {
+        if self.sessionComponents[2].type == .stopwatch {
             DispatchQueue.main.async {
-                self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .none)
-                self.setHeaderView()
+                self.tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .none)
             }
         }
     }
@@ -117,19 +117,11 @@ class SessionViewController: BaseViewController {
         Notification.success(title: "", text: "The session has been stopped")
     }
     
-    func setHeaderView() {
-        let headerViewRect = CGRect(x: 0, y: 0, width: Globals.shared.screenWidth, height: Globals.shared.screenWidth * 0.4830917874)
-        let headerView = SessionHeaderCell(frame: headerViewRect)
-        tableView.tableHeaderView = headerView
-        tableView.tableHeaderView?.frame = headerViewRect
-        headerView.initView(imageName: "sessionHeaderImage")
-    }
     
 //    initviewmodel to the take live data from player and session model
     func initViewModel() {
         sessionViewModel.reloadTableViewClosure = { [weak self] in
             guard let self = self else { return }
-                self.setHeaderView()
                 self.setComponents()
                 self.tableView.reloadData()
             
@@ -137,7 +129,6 @@ class SessionViewController: BaseViewController {
         
         playersViewModel.reloadTableViewClosure = { [weak self] in
             guard let self = self else { return }
-                self.setHeaderView()
                 self.setComponents()
                 self.tableView.reloadData()
             
@@ -148,12 +139,14 @@ class SessionViewController: BaseViewController {
     func setComponents() {
         self.sessionComponents.removeAll()
         self.sessionComponents.append(contentsOf: [
+            SessionComponents(type: .header),
             SessionComponents(type: .playerDetails),
             SessionComponents(type: .stopwatch),
             SessionComponents(type: .lapFinish),
             SessionComponents(type: .lapDetails),
             SessionComponents(type: .sessionOverview),
             SessionComponents(type: .chart),
+            SessionComponents(type: .navigation),
         ])
         
     }
@@ -189,6 +182,7 @@ class SessionViewController: BaseViewController {
         }
 }
 
+// MARK: - TableView Delegate & Datasource
 extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -203,6 +197,10 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let component = sessionComponents[indexPath.section]
         switch component.type {
+        case .header:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SessionHeaderCell", for: indexPath) as! SessionHeaderCell
+            cell.initView(imageName: "sessionHeaderImage")
+            return cell
         case .playerDetails:
             let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableViewCell", for: indexPath) as! PlayerTableViewCell
             cell.initView(player: playersViewModel.selectedPlayerModel)
@@ -220,7 +218,7 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
             let playerLapArray = sessionViewModel.playersOngoingSession?.laps.toArray()
             if playerLapArray?.count ?? 0 > 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "LapTimesTableViewCell", for: indexPath) as! LapTimesTableViewCell
-                cell.initViews(lapDetails: playerLapArray?.last, isSessionOverviewShown: isSessionOverviewShown)
+                cell.initViews(lapDetails: playerLapArray?.last, isSessionOverviewShown: isSessionOverviewShown, lapCount: lapCount)
                 return cell
             }
             return UITableViewCell()
@@ -243,12 +241,18 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell
             }
             return UITableViewCell()
+        case .navigation:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SessionToLeaderBoardNavigationCell", for: indexPath) as! SessionToLeaderBoardNavigationCell
+            cell.initViews()
+            return cell
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let component = sessionComponents[indexPath.section]
         switch component.type {
+        case .header:
+            return Globals.shared.screenWidth * 0.4830917874
         case .playerDetails:
             return Globals.shared.screenWidth * 0.2
         case .stopwatch:
@@ -271,12 +275,14 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
                 return Globals.shared.screenWidth * 0.9661835749
             }
             return 0
-            
+        case .navigation:
+            return Globals.shared.screenWidth * 0.2
         }
     }
-    
+        
 }
 
+// MARK: - Session Delegate
 extension SessionViewController: SessionDelegate {
     
 //    starts the timer
@@ -306,7 +312,6 @@ extension SessionViewController: SessionDelegate {
             sessionViewModel.saveSessionOverview(playerId: self.playerId, sessionId: sessionId , lapCount: self.lapCount, finalTimeInSeconds: self.counter, distance: self.distance ?? 1.0)
         }
         self.stopTimer()
-        tableView.reloadData()
     }
     
 }
